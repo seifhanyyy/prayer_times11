@@ -1,19 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'package:praytimes/Constants.dart';
+import 'package:praytimes/helper/local_notifications_helper.dart';
+
 import 'data.dart';
 import 'json_connection.dart';
-  
-import 'Al-Azkar.dart';
-import 'Quraaaaaan.dart';
 import 'playground.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:praytimes/helper/local_notifications_helper.dart';
 //import 'package:easy_localization/easy_localization.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -29,12 +27,19 @@ void main() async {
 
 /*
 Future<void> main() async {
+
   notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(flutterLocalNotificationsPlugin);
+
   runApp(
+
+
          StartApp(),
+
+
   );
 }
+
 */
 class StartApp extends StatelessWidget {
   @override
@@ -238,8 +243,10 @@ class _PrayTimesState extends State<PrayTimes> {
   /*static String city = 'Cairo';
   static String country = 'Egypt';
   static int method = 99;
+
   final String url =
       'http://api.aladhan.com/v1/timingsByCity?city=$city &country=$country &method=$method';
+
   //http://api.aladhan.com/v1/timingsByCity?city=$city&country=$country&method=$method
 */
   Future getPTLocation() async {

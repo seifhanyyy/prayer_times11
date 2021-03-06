@@ -28,7 +28,7 @@ class _ContactsState extends State<Deeb> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
-      height: 422,
+      height: 130,
       color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,65 +36,125 @@ class _ContactsState extends State<Deeb> {
         children: [
           Row(
             children: [
-              SizedBox(
-                width: 30,height: 30,
+              Icon(
+                Icons.person,
+                color: Theme.of(context).primaryColor,
+                size: 20,
               ),
-               Expanded(
-                child: Text(
+              SizedBox(
+                width: 6,
+              ),
+              Text(
                 rashad['category'],
                 style: TextStyle(
-                    fontSize: 20,
-                   color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w900),
+                    fontSize: 16,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600),
               ),
-              ),
-              
             ],
           ),
           SizedBox(
-           width: 40,height: 40,
+            height: 10,
           ),
           Row(
             children: [
-              
-              FittedBox(
-              
+              Icon(
+                Icons.phone_iphone,
+                color: Theme.of(context).accentColor,
+                size: 20,
               ),
-            Expanded(
-                child: Text(
+              SizedBox(
+                width: 6,
+              ),
+              Text(
+                rashad['description'],
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(width: 15),
+              Icon(
+                Icons.group_work,
+                color: typeColor,
+                size: 20,
+              ),
+              SizedBox(
+                width: 6,
+              ),
+              Text(
                 rashad['zekr'],
                 style: TextStyle(
                     fontSize: 16,
-                   color: Theme.of(context).primaryColor,
+                    color: typeColor,
                     fontWeight: FontWeight.w600),
-              ),
               ),
             ],
           ),
-              SizedBox(width: 30,height: 30,),
-           // description
-              Row(
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              
+              GestureDetector(
+                onTap: () {
+                  /* Navigator(.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => EditContact(
+                                contactKey: contact['key'],
+                              )));*/
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text('Edit',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w600)),
+                  ],
+                ),
+              ),
               SizedBox(
-               width: 40,height: 40,
+                width: 20,
               ),
-            Expanded(
-                child: Text(
-                rashad['description'],
-                style: TextStyle(
-                    fontSize: 15,
-                   color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600),
+              GestureDetector(
+                onTap: () {
+                  _showDeleteDialog(contact: rashad);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: Colors.red[700],
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text('Delete',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.red[700],
+                            fontWeight: FontWeight.w600)),
+                  ],
+                ),
               ),
+              SizedBox(
+                width: 20,
               ),
             ],
-          ),
-            ],
-      ) ,
-              );
-       
-            
+          )
+        ],
+      ),
+    );
   }
 
   _showDeleteDialog({Map contact}) {
@@ -150,7 +210,7 @@ class _ContactsState extends State<Deeb> {
             }),
           );*/
         },
-        //child: Icon(Icons.add, color: Colors.white),
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
