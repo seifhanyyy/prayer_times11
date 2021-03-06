@@ -1,17 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+
 import 'package:praytimes/Feedback.dart';
 import 'package:praytimes/qiblah_compass.dart';
-import 'Al-Quran.dart';
+import 'NewAzkar.dart';
 import 'Home_Page.dart';
-//import 'Flutter_Custom_Icons/custom_icons_icons.dart';
-import 'Al-Azkar.dart';
 import 'package:praytimes/Custom_Icons/custom_icons_icons.dart';
-import 'package:dcdg/dcdg.dart';
-import 'package:praytimes/Settings.dart';
 import 'Quraaaaaan.dart';
 import 'Feedback.dart';
-import 'Alphaaa.dart';
+
 import 'Maps.dart';
 
        
@@ -31,7 +28,7 @@ class _MainState extends State<Main> {
 
   final pages = [
     HomePage(),
-    AlAzkarPage(),
+    Deeeb(),
     Quran(),
     QiblahCompass(),
     Map(), 

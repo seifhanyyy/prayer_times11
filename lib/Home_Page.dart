@@ -29,19 +29,12 @@ void main() async {
 
 /*
 Future<void> main() async {
-
   notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(flutterLocalNotificationsPlugin);
-
   runApp(
-
-
          StartApp(),
-
-
   );
 }
-
 */
 class StartApp extends StatelessWidget {
   @override
@@ -245,10 +238,8 @@ class _PrayTimesState extends State<PrayTimes> {
   /*static String city = 'Cairo';
   static String country = 'Egypt';
   static int method = 99;
-
   final String url =
       'http://api.aladhan.com/v1/timingsByCity?city=$city &country=$country &method=$method';
-
   //http://api.aladhan.com/v1/timingsByCity?city=$city&country=$country&method=$method
 */
   Future getPTLocation() async {

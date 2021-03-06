@@ -312,7 +312,7 @@ class Meta {
     final String latitudeAdjustmentMethod;
     final String midnightMode;
     final String school;
-    final Offset offset;
+    //final Offset offset;
 
     Meta({
         this.latitude,
@@ -322,7 +322,7 @@ class Meta {
         this.latitudeAdjustmentMethod,
         this.midnightMode,
         this.school,
-        this.offset,
+        //this.offset,
     });
 
     factory Meta.fromRawJson(String str) => Meta.fromJson(json.decode(str));
@@ -337,7 +337,7 @@ class Meta {
         latitudeAdjustmentMethod: json["latitudeAdjustmentMethod"],
         midnightMode: json["midnightMode"],
         school: json["school"],
-        offset: Offset.fromJson(json["offset"]),
+        //offset: Offset.fromJson(json["offset"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -348,7 +348,7 @@ class Meta {
         "latitudeAdjustmentMethod": latitudeAdjustmentMethod,
         "midnightMode": midnightMode,
         "school": school,
-        "offset": offset.toJson(),
+        //"offset": offset.toJson(),
     };
 }
 
