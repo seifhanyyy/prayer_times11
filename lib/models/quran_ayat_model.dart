@@ -1,7 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:dcdg/dcdg.dart';
 
 class QuranAyatModel {
   final int ayatId;
@@ -9,7 +9,8 @@ class QuranAyatModel {
   final int surahId;
   final int juzId;
   final String ayatArab;
-  final String ayatText;
+
+  //final String ayatText;
 
   QuranAyatModel({
     @required this.ayatId,
@@ -17,14 +18,12 @@ class QuranAyatModel {
     @required this.surahId,
     @required this.juzId,
     @required this.ayatArab,
-    @required this.ayatText,
+    //@required this.ayatText,
   });
 }
 
 class QuranAyat with ChangeNotifier {
-  List<QuranAyatModel> _data =
-      [];
-
+  List<QuranAyatModel> _data = [];
 
   List _mp3 = [
     'http://ia802609.us.archive.org/13/items/quraninindonesia/001AlFaatihah.mp3',
@@ -54,23 +53,17 @@ class QuranAyat with ChangeNotifier {
     return [..._data];
   }
 
-
   String findMp3Url(id) {
-    return _mp3[id -
-        1];
+    return _mp3[id - 1];
   }
 
-  Future<void> getDetail(
-      int id, int navigationBarIndex, int offset, int total) async {
-
+  Future<void> getDetail(int id, int navigationBarIndex, int offset, int total) async {
     if ((navigationBarIndex == 2 && total == offset) ||
         (navigationBarIndex == 0 && total > offset)) {
-
       final url =
           'https://quran.kemenag.go.id/index.php/api/v1/ayatweb/$id/0/$offset/10';
       final response = await http.get(url);
-      final extractData = json.decode(response.body)['data']
-          as List;
+      final extractData = json.decode(response.body)['data'] as List;
 
       if (extractData == null) {
         return;
@@ -79,14 +72,13 @@ class QuranAyat with ChangeNotifier {
       final List<QuranAyatModel> ayatData = [];
 
       extractData.forEach((value) {
-
         ayatData.add(QuranAyatModel(
             ayatId: value['aya_id'],
             ayatNumber: value['aya_number'],
             surahId: value['sura_id'],
             juzId: value['juz_id'],
-            ayatArab: value['aya_text'],
-            ayatText: value['translation_aya_text']));
+            ayatArab: value['aya_text']));
+        //ayatText: value['translation_aya_text']));
       });
 
       _data = ayatData;

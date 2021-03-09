@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'package:praytimes/helper/local_notifications_helper.dart';
 
 import 'data.dart';
 import 'json_connection.dart';
@@ -20,9 +19,6 @@ NotificationAppLaunchDetails notificationAppLaunchDetails;
 
 void main() async {
   runApp(Home());
-  notificationAppLaunchDetails =
-      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  await initNotifications(flutterLocalNotificationsPlugin);
 }
 
 /*
@@ -153,6 +149,23 @@ class _Clock extends State<Clock> {
   }
 }
 
+class NewScreen extends StatelessWidget {
+  String payload;
+
+  NewScreen({
+    @required this.payload,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(payload),
+      ),
+    );
+  }
+}
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -210,7 +223,7 @@ Widget buttonSection = Container(
 Column _buildButtonColumn(Color color, IconData icon, String label) {
   return Column(
     //mainAxisSize: MainAxisSize.min,
-   // mainAxisAlignment: MainAxisAlignment.center,
+    // mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Icon(icon, color: color),
       Container(
@@ -282,56 +295,54 @@ class _PrayTimesState extends State<PrayTimes> {
         future: jsonConnection.getPTLocation(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-              return Container(
-                alignment: Alignment.center,
-                child: Row(
+            return Container(
+              alignment: Alignment.center,
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Text(
-                            'Fajr',
-                            style: TextStyle(fontSize: 40),
-                          ),
-                          Text(
-                            'Dhuhr',
-                            style: TextStyle(fontSize: 40),
-                          ),
-                          Text('Asr', style: TextStyle(fontSize: 40)),
-                          Text('Maghrib', style: TextStyle(fontSize: 40)),
-                          Text('Isha', style: TextStyle(fontSize: 40)),
-                        ],
-                      ),
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Text(
+                          'Fajr',
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          'Dhuhr',
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text('Asr', style: TextStyle(fontSize: 40)),
+                        Text('Maghrib', style: TextStyle(fontSize: 40)),
+                        Text('Isha', style: TextStyle(fontSize: 40)),
+                      ],
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.,
-                         mainAxisAlignment: MainAxisAlignment.center,
-                        //mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(snapshot.data.data.timings.fajr,
-                              style: TextStyle(fontSize: 40)),
-                          Text(snapshot.data.data.timings.dhuhr,
-                              style: TextStyle(fontSize: 40)),
-                          Text(snapshot.data.data.timings.asr,
-                              style: TextStyle(fontSize: 40)),
-                          Text(snapshot.data.data.timings.maghrib,
-                              style: TextStyle(fontSize: 40)),
-                          Text(snapshot.data.data.timings.isha,
-                              style: TextStyle(fontSize: 40)),
-                        ],
-                      ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      //mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(snapshot.data.data.timings.fajr,
+                            style: TextStyle(fontSize: 40)),
+                        Text(snapshot.data.data.timings.dhuhr,
+                            style: TextStyle(fontSize: 40)),
+                        Text(snapshot.data.data.timings.asr,
+                            style: TextStyle(fontSize: 40)),
+                        Text(snapshot.data.data.timings.maghrib,
+                            style: TextStyle(fontSize: 40)),
+                        Text(snapshot.data.data.timings.isha,
+                            style: TextStyle(fontSize: 40)),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            
-          ;
+                  ),
+                ],
+              ),
+            );
           } else {
             return CircularProgressIndicator();
           }

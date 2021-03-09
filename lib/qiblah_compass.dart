@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:math' show pi;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:praytimes/Custom_Icons/custom_icons_icons.dart';
+
 import 'flutter_qiblah.dart';
 import 'loading_indicator.dart';
 import 'location_error_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 
 class QiblahCompass extends StatefulWidget {
   @override
@@ -26,45 +29,65 @@ class _QiblahCompassState extends State<QiblahCompass> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.all(8.0),
-      child: StreamBuilder(
-        stream: stream,
-        builder: (context, AsyncSnapshot<LocationStatus> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
-            return LoadingIndicator();
-          if (snapshot.data.enabled == true) {
-            switch (snapshot.data.status) {
-              case LocationPermission.always:
-              case LocationPermission.whileInUse:
-                return QiblahCompassWidget();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true, // this is all you need
+          leading: Icon(CustomIcons.compass_1),
 
-              case LocationPermission.denied:
+          title: Text(
+            "اتجاه القبله",
+            //textAlign: TextAlign.right,
+            //mainAxisAlignment: MainAxisAlignment.center,
+
+            style: TextStyle(
+                fontFamily: 'CustomFonts',
+                //fontWeight: FontWeight.w900,
+                fontSize: 40),
+          ),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(8.0),
+          child: StreamBuilder(
+            stream: stream,
+            builder: (context, AsyncSnapshot<LocationStatus> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return LoadingIndicator();
+              if (snapshot.data.enabled == true) {
+                switch (snapshot.data.status) {
+                  case LocationPermission.always:
+                  case LocationPermission.whileInUse:
+                    return QiblahCompassWidget();
+
+                  case LocationPermission.denied:
+                    return LocationErrorWidget(
+                      error: "Location service permission denied",
+                      callback: _checkLocationStatus,
+                    );
+                  case LocationPermission.deniedForever:
+                    return LocationErrorWidget(
+                      error: "Location service Denied Forever !",
+                      callback: _checkLocationStatus,
+                    );
+                  // case GeolocationStatus.unknown:
+                  //   return LocationErrorWidget(
+                  //     error: "Unknown Location service error",
+                  //     callback: _checkLocationStatus,
+                  //   );
+                  default:
+                    return Container();
+                }
+              } else {
                 return LocationErrorWidget(
-                  error: "Location service permission denied",
+                  error: "Please enable Location service",
                   callback: _checkLocationStatus,
                 );
-              case LocationPermission.deniedForever:
-                return LocationErrorWidget(
-                  error: "Location service Denied Forever !",
-                  callback: _checkLocationStatus,
-                );
-              // case GeolocationStatus.unknown:
-              //   return LocationErrorWidget(
-              //     error: "Unknown Location service error",
-              //     callback: _checkLocationStatus,
-              //   );
-              default:
-                return Container();
-            }
-          } else {
-            return LocationErrorWidget(
-              error: "Please enable Location service",
-              callback: _checkLocationStatus,
-            );
-          }
-        },
+              }
+            },
+          ),
+        ),
       ),
     );
   }

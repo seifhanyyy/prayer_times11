@@ -1,10 +1,9 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:audioplayers/audioplayers.dart';
 
-import '../models/quran_model.dart';
 import '../models/quran_ayat_model.dart';
-
+import '../models/quran_model.dart';
 import '../widget/quran_read.dart';
 
 class QuranDetail extends StatefulWidget {
@@ -20,25 +19,19 @@ class _QuranDetailState extends State<QuranDetail> {
   int totalData = 0;
   int id; //ID SURAH
   bool isPlay = false;
-  AudioPlayer audioPlayer =
-      AudioPlayer();
-
+  AudioPlayer audioPlayer = AudioPlayer();
 
   void play() async {
-
     if (!isPlay) {
-
       final mp3URL =
           Provider.of<QuranAyat>(context, listen: false).findMp3Url(id);
       int result = await audioPlayer.play(mp3URL);
       if (result == 1) {
-
         setState(() {
           isPlay = true;
         });
       }
     } else {
-
       int result = await audioPlayer.stop();
       if (result == 1) {
         setState(() {
@@ -48,38 +41,30 @@ class _QuranDetailState extends State<QuranDetail> {
     }
   }
 
-
   void _changeBottomIndex(index) {
-
     if (index == 1) {
       play();
     }
 
-
     final loadData = Provider.of<QuranAyat>(context, listen: false).items;
 
     totalData =
-        loadData.length > 0 ? loadData[loadData.length - 1].ayatNumber : 0;
-
+    loadData.length > 0 ? loadData[loadData.length - 1].ayatNumber : 0;
 
     if (index == 0) {
-
       offset -= totalData == offset ? (loadData.length * 2) : loadData.length;
     } else if (index == 2) {
-
       offset += totalData == offset ? (loadData.length * 2) : loadData.length;
     }
 
     setState(() {
-      bottomIndex =
-          index;
+      bottomIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    id = ModalRoute.of(context).settings.arguments
-        as int;
+    id = ModalRoute.of(context).settings.arguments as int;
 
     final data = Provider.of<QuranData>(context, listen: false).findById(id);
 
@@ -97,40 +82,37 @@ class _QuranDetailState extends State<QuranDetail> {
           ),
         ),
         body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/yoyo.jpg"),
+                fit: BoxFit.cover,
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(0.56), BlendMode.dstATop)),
+          ),
           padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.all(5),
+          //margin: const EdgeInsets.all(5),
           child: FutureBuilder(
-            future: Provider.of<QuranAyat>(context, listen: false).getDetail(
-                id,
-                bottomIndex,
-                offset,
-                totalData),
+            future: Provider.of<QuranAyat>(context, listen: false)
+                .getDetail(id, bottomIndex, offset, totalData),
             builder: (context, snapshot) {
-
               if (snapshot.connectionState == ConnectionState.waiting) {
-
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
-
                 if (snapshot.hasError) {
-
                   return Center(
-                    child: Text("Error! Periksa Koneksi Anda"),
+                    child: Text("Error!"),
                   );
                 } else {
-
                   return Consumer<QuranAyat>(
-
                     builder: (ctx, data, _) => ListView.builder(
                       shrinkWrap: true,
-                      itemCount: data.items
-                          .length,
+                      itemCount: data.items.length,
                       itemBuilder: (ctx, i) => QuranRead(
                         data.items[i].ayatNumber,
                         data.items[i].ayatArab,
-                        data.items[i].ayatText,
+                        //data.items[i].ayatText,
                       ),
                     ),
                   );
@@ -139,11 +121,8 @@ class _QuranDetailState extends State<QuranDetail> {
             },
           ),
         ),
-
         bottomNavigationBar: BottomNavigationBar(
-
           currentIndex: bottomIndex,
-
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.arrow_left), title: Text('Previous')),
@@ -153,7 +132,6 @@ class _QuranDetailState extends State<QuranDetail> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.arrow_right), title: Text('Next')),
           ],
-
           onTap: _changeBottomIndex,
         ));
   }

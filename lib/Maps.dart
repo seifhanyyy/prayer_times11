@@ -32,10 +32,17 @@ class _MyAppState extends State<Map> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Nearby Mosques'),
-          backgroundColor: Colors.green[700],
+          centerTitle: true, // this is all you need
+          title: Text(
+            "أماكن المساجد",
+            style: TextStyle(
+                fontFamily: 'CustomFonts',
+                //fontWeight: FontWeight.w900,
+                fontSize: 40),
+          ),
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,

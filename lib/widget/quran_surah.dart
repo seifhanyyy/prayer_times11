@@ -5,11 +5,11 @@ class QuranSurah extends StatelessWidget {
   final int id;
   final String name;
   final String arab;
-  final String translate;
+  //final String translate;
   final int countAyat;
 
   //BUAT CONSTRUCTOR UNTUK MEMINTA DATA KETIKA CLASS INI DI-LOAD
-  QuranSurah(this.id, this.name, this.arab, this.translate, this.countAyat);
+  QuranSurah(this.id, this.name, this.arab, this.countAyat);
 
   //BUAT METHOD UNTUK REDIRECT KE SCREEN BARU
   //FUNGSI INI NANTINYA DIGUNAKAN UNTUK BERPINDAH KE DETAIL MASING-MASING SURAH
@@ -45,7 +45,7 @@ class QuranSurah extends StatelessWidget {
         ),
         //TITLE POSISINYA DITENGAH, KITA GUNAKAN UNTUK MENAMPILKAN NAMA SURAH (LENGKAP DENGAN BAHASA ARABNYA)
         title: Text(
-          '$name ($arab)',
+          '$arab',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         //DAN SUBTITLE POSISINYA DIBAWAH TITLE UNTUK MENAMPILKAN INFORMASI TAMBAHAN
@@ -53,15 +53,7 @@ class QuranSurah extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             //PERTAMA ADALAH TERJEMAHAN DARI NAMA SURAH
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.local_florist,
-                  color: Colors.blueAccent,
-                ),
-                Expanded(child: Text('Terjemahan: $translate')),
-              ],
-            ),
+
             //JUMLAH AYAT DARI SURAH TERSEBUT
             Row(
               children: <Widget>[
@@ -69,7 +61,7 @@ class QuranSurah extends StatelessWidget {
                   Icons.local_florist,
                   color: Colors.blueAccent,
                 ),
-                Text('Jumlah Ayat: $countAyat'),
+                Text('عدد الآيات: $countAyat'),
               ],
             ),
           ],

@@ -41,13 +41,16 @@ dependencies:
   google_maps_flutter: ^1.0.3
   provider: ^3.1.0
   audioplayers: ^0.13.2
-  flutter_local_notifications: ^4.0.1+1
+  flutter_local_notifications: ^1.4.4+2
   dotted_border: ^1.0.5
   easy_localization: ^2.3.2
   mdi: ^2.0.0
   flutter_launcher_icons: ^0.8.1
   dcdg: ^2.0.1
   font_awesome_flutter: ^8.5.0
+  rxdart: ^0.24.1
+  path_provider: ^1.6.11
+  workmanager: ^0.2.3
   url_launcher: ^5.4.1
 dev_dependencies:
   flutter_test:
@@ -85,9 +88,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: CustomIcons
-       fonts:
-         - asset: lib/Custom_Icons/fonts/CustomIcons.ttf
+    - family: CustomIcons
+      fonts:
+        - asset: lib/Custom_Icons/fonts/CustomIcons.ttf
+    - family: CustomFonts
+      fonts:
+        - asset: lib/Custom_Icons/fonts/UrdType.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

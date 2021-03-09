@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:praytimes/Custom_Icons/custom_icons_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../models/quran_model.dart';
@@ -10,30 +11,23 @@ class QuranList extends StatefulWidget {
 }
 
 class _QuranListState extends State<QuranList> {
-  ScrollController
-      controller;
-
+  ScrollController controller;
 
   bool loadMore = false;
   bool firstLoad = true;
 
   @override
   void initState() {
-
     Future.delayed(Duration.zero).then((_) {
-
       Provider.of<QuranData>(context, listen: false).getData().then((_) {
-
         setState(() {
           firstLoad = false;
         });
       });
     });
     super.initState();
-    controller = ScrollController()
-      ..addListener(_scrollListener);
+    controller = ScrollController()..addListener(_scrollListener);
   }
-
 
   @override
   void dispose() {
@@ -42,7 +36,6 @@ class _QuranListState extends State<QuranList> {
     super.dispose();
   }
 
-
   void _scrollListener() {
     //CEK JIKA POSISI = MAX SCROLL (MENTOK PALING BAWAH)
     if (controller.position.pixels == controller.position.maxScrollExtent) {
@@ -50,7 +43,6 @@ class _QuranListState extends State<QuranList> {
       setState(() {
         loadMore = true;
       });
-
 
       Provider.of<QuranData>(context, listen: false).getData().then((_) {
         //JIKA BERHASIL, MAKA SET loadMore JADI FALSE
@@ -64,46 +56,46 @@ class _QuranListState extends State<QuranList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        leading: const Icon(Icons.book),
-        title: const Text("Al-Qur'an"),
-        
+        centerTitle: true, // this is all you need
+        leading: Icon(CustomIcons.quran_1),
+
+        //leading: const Icon(Icons.book),
+        title: const Text(
+          "القرآن",
+          style: TextStyle(
+              fontFamily: 'CustomFonts',
+              //fontWeight: FontWeight.w900,
+              fontSize: 40),
+        ),
       ),
-    
       floatingActionButton: loadMore ? CircularProgressIndicator() : null,
       body: Container(
-        
-         decoration: BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/yoyo.jpg"),
-            fit: BoxFit.fill,
-            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.56), BlendMode.dstATop)
-        
-           
-  ),
-            ),
-             padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.all(5),
+              image: AssetImage("images/yoyo.jpg"),
+              fit: BoxFit.cover,
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.56), BlendMode.dstATop)),
+        ),
+        padding: const EdgeInsets.all(5),
+        //margin: const EdgeInsets.all(5),
         child: firstLoad
             ? Center(
                 child: CircularProgressIndicator(),
               )
-
             : Consumer<QuranData>(
-
                 builder: (ctx, data, _) => ListView.builder(
-                  controller: controller, //SET CONTROLLER YANG DIBUAT DIAWAL
+                  controller: controller,
+                  //SET CONTROLLER YANG DIBUAT DIAWAL
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: data.items
-                      .length,
+                  itemCount: data.items.length,
                   itemBuilder: (ctx, i) => QuranSurah(
-
                     data.items[i].id,
                     data.items[i].name,
                     data.items[i].arab,
-                    data.items[i].translate,
+                    //data.items[i].translate,
                     data.items[i].countAyat,
                   ),
                 ),

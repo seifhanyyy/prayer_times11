@@ -4,10 +4,10 @@ class QuranRead extends StatelessWidget {
   //DEFINISIKAN VARIABLE DARI INFORMAIS YANG DIBUTUHKAN
   final int ayatNumber;
   final String ayatArab;
-  final String ayatText;
+  //final String ayatText;
 
   //BUAT CONSTRUCTOR UNTUK MEMINTA DATA
-  QuranRead(this.ayatNumber, this.ayatArab, this.ayatText);
+  QuranRead(this.ayatNumber, this.ayatArab);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class QuranRead extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         //DIBAWAH TITLE TAMPILKAN TERJEMAHANNYA
-        subtitle: Text('$ayatText'),
+        //subtitle: Text('$ayatText'),
       ),
     );
   }
