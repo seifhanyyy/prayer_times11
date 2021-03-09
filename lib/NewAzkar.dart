@@ -4,8 +4,6 @@ import 'package:praytimes/Custom_Icons/custom_icons_icons.dart';
 import 'package:praytimes/screen/AzkarAstykaz.dart';
 import 'package:praytimes/screen/AzkarB3dSalah.dart';
 import 'package:praytimes/screen/AzkarNoom.dart';
-
-import 'Constants.dart';
 import 'screen/AzkarAzan.dart';
 import 'screen/AzkarMasa2.dart';
 import 'screen/AzkarSaba7.dart';
@@ -99,7 +97,7 @@ class _alAzkarState extends State<alAzkar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: deeb,
+      
       height: MediaQuery.of(context).size.height,
       child: ListView.builder(
         scrollDirection: Axis.vertical,

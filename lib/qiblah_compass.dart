@@ -71,11 +71,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                       error: "Location service Denied Forever !",
                       callback: _checkLocationStatus,
                     );
-                  // case GeolocationStatus.unknown:
-                  //   return LocationErrorWidget(
-                  //     error: "Unknown Location service error",
-                  //     callback: _checkLocationStatus,
-                  //   );
+          
                   default:
                     return Container();
                 }

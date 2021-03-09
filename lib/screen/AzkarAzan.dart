@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-import '../Alphaaa.dart';
+import 'package:praytimes/NewAzkar.dart';
 
 class AzkarA extends StatefulWidget {
   @override
@@ -11,8 +11,6 @@ class AzkarA extends StatefulWidget {
 
 class _ContactsState extends State<AzkarA> {
   Query _ref;
-  DatabaseReference reference =
-      FirebaseDatabase.instance.reference().child('rashad');
   @override
   void initState() {
     super.initState();
@@ -104,7 +102,7 @@ class _ContactsState extends State<AzkarA> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) {
-              return Deeb();
+              return Azkar();
             }),
           );
         },

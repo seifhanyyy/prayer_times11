@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-import '../Alphaaa.dart';
+import 'package:praytimes/NewAzkar.dart';
 
 class AzkarM extends StatefulWidget {
   @override
@@ -132,7 +132,7 @@ class _ContactsState extends State<AzkarM> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) {
-              return Deeb();
+              return Azkar();
             }),
           );
         },

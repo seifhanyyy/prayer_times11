@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-import '../Alphaaa.dart';
+import 'package:praytimes/NewAzkar.dart';
 
 class AzkarN extends StatefulWidget {
   @override
@@ -11,17 +11,16 @@ class AzkarN extends StatefulWidget {
 
 class _ContactsState extends State<AzkarN> {
   Query _ref;
-  DatabaseReference reference =
-      FirebaseDatabase.instance.reference().child('rashad');
+
   @override
   void initState() {
     super.initState();
-    _ref = FirebaseDatabase.instance.reference().child('Azan');
+    _ref = FirebaseDatabase.instance.reference().child('Nom');
   }
 
   Widget _buildContactItem({Map rashad}) {
     Color typeColor = getTypeColor(rashad['type']);
-    if (rashad['category'] == "أذكار الآذان") {
+    if (rashad['category'] == "أذكار النوم") {
       return Container(
         margin: EdgeInsets.all(20),
         padding: EdgeInsets.all(10),
@@ -104,7 +103,7 @@ class _ContactsState extends State<AzkarN> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) {
-              return Deeb();
+              return Azkar();
             }),
           );
         },

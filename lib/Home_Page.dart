@@ -2,20 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-
 import 'data.dart';
 import 'json_connection.dart';
 import 'playground.dart';
-//import 'package:easy_localization/easy_localization.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-NotificationAppLaunchDetails notificationAppLaunchDetails;
 
 void main() async {
   runApp(Home());
@@ -53,7 +46,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
+          
       body: HomePage(),
     ));
   }
@@ -149,22 +144,7 @@ class _Clock extends State<Clock> {
   }
 }
 
-class NewScreen extends StatelessWidget {
-  String payload;
 
-  NewScreen({
-    @required this.payload,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(payload),
-      ),
-    );
-  }
-}
 
 class HomePage extends StatelessWidget {
   @override
@@ -176,6 +156,7 @@ class HomePage extends StatelessWidget {
       title: 'Prayer Times',
 
       home: Scaffold(
+        
         appBar: AppBar(
           title: const Text('Prayer Times'),
         ),
@@ -190,6 +171,7 @@ class HomePage extends StatelessWidget {
             child: Column(children: <Widget>[
               imageSection,
               prayTime,
+              
             ])),
       ),
     );
@@ -253,15 +235,7 @@ class _PrayTimesState extends State<PrayTimes> {
   Data list;
   static double pLat;
   static double pLong;
-  /*static String city = 'Cairo';
-  static String country = 'Egypt';
-  static int method = 99;
-
-  final String url =
-      'http://api.aladhan.com/v1/timingsByCity?city=$city &country=$country &method=$method';
-
-  //http://api.aladhan.com/v1/timingsByCity?city=$city&country=$country&method=$method
-*/
+ 
   Future getPTLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);

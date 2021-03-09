@@ -48,7 +48,7 @@ class QuranAyat with ChangeNotifier {
     'http://ia802609.us.archive.org/13/items/quraninindonesia/020Thaahaa2.mp3'
   ];
 
-  //GETTER AGAR VALUE _data BISA DIAKSES DARI LUAR CLASS
+
   List<QuranAyatModel> get items {
     return [..._data];
   }

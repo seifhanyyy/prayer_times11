@@ -1,13 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:praytimes/Custom_Icons/custom_icons_icons.dart';
+import 'package:praytimes/Home_Page.dart';
 import 'package:praytimes/Settings.dart';
+import 'package:praytimes/playground.dart';
 import 'package:praytimes/qiblah_compass.dart';
 import 'package:workmanager/workmanager.dart';
-
-import 'Home_Page.dart';
 import 'Maps.dart';
 import 'NewAzkar.dart';
 import 'Quraaaaaan.dart';
@@ -24,7 +23,7 @@ void main() {
       isInDebugMode: true);
   // Periodic task registration
   Workmanager.registerPeriodicTask(
-    "2",
+    "6",
 
     //This is the value that will be
     // returned in the callbackDispatcher
@@ -38,7 +37,7 @@ void main() {
     // if you have configured a lower frequency.
     frequency: Duration(minutes: 15),
   );
-  runApp(Main());
+  runApp(StartApp());
 }
 
 void callbackDispatcher() {
@@ -85,7 +84,7 @@ class _MainState extends State<Main> {
   int _currentIndex = 0;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-
+ 
   final pages = [
     HomePage(),
     Azkar(),
@@ -109,6 +108,7 @@ class _MainState extends State<Main> {
           type: BottomNavigationBarType.fixed,
           //iconSize: 30,
           items: [
+          
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               title: Text('Home'),

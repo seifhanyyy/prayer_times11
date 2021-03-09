@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:praytimes/main.dart';
 import 'Home_Page.dart';
-import 'main.dart';
+
 class Playground extends StatefulWidget {
   Playground({Key key}) : super(key: key);
 
@@ -60,7 +61,7 @@ class _PlaygroundState extends State<Playground> with TickerProviderStateMixin {
             parent: _squareBottomLeftAnimCont, curve: Curves.bounceOut));
 
     _squareBottomRightAnimCont = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
 
@@ -78,23 +79,24 @@ class _PlaygroundState extends State<Playground> with TickerProviderStateMixin {
 
     this._executeAnimation(animation: _squareTopRightAnimCont, interval: 500);
 
-    this._executeAnimation(animation: _squareBottomLeftAnimCont, interval: 600);
+    this._executeAnimation(animation: _squareBottomLeftAnimCont, interval: 800);
 
     this._executeAnimation(
-        animation: _squareBottomRightAnimCont, interval: 900);
+        animation: _squareBottomRightAnimCont, interval: 1100);
 
     _squareBottomRightAnimCont.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _squareColorAnimCont.forward();
 
-
-
         setState(() {
           _displayText = true;
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(
+            context,
+            // Create the SelectionScreen in the next step.
+            MaterialPageRoute(builder: (context) => Main()),
+          );
         });
       }
-
     });
   }
 
@@ -104,10 +106,7 @@ class _PlaygroundState extends State<Playground> with TickerProviderStateMixin {
         animation.forward();
       }
     });
-    if (animation == AnimationStatus.completed)
-      {
-
-      }
+    if (animation == AnimationStatus.completed) {}
   }
 
   @override
@@ -129,7 +128,7 @@ class _PlaygroundState extends State<Playground> with TickerProviderStateMixin {
             Positioned(
                 bottom: MediaQuery.of(context).size.height * 0.1,
                 child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 1500),
+                    duration: Duration(milliseconds: 50),
                     opacity: _displayText ? 1 : 0,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -371,7 +370,5 @@ class _PlaygroundState extends State<Playground> with TickerProviderStateMixin {
             )
           ],
         ));
-
   }
-
 }
